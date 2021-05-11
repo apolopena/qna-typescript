@@ -172,9 +172,16 @@ if [ ! -d "$GITPOD_REPO_ROOT/vendor" ]; then
     else
       log "SUCCESS: $msg"
     fi
-    log " --> Running Laravel Mix"
-    npm run dev
-    log " --> Running of Laravel Mix complete"
+
+    # Project specific change to avoid a harmless Mix error that could possibly occur and confuse the user 
+    # Only run Mix if this is not a Typescript project in case tsconfig.json is not yet in version control
+    # If this is a Typescript project then Mix will be run in init-project.sh after tsconfig.json is generated
+    if [ ! -f resources/js/app.tsx ]; then
+      log " --> Running Laravel Mix"
+      npm run dev
+      log " --> Running of Laravel Mix complete"
+    fi
+
   fi # end node_modules/ check
 fi # end vendor/ check for bootstrapping
 # END: Bootstrapping
