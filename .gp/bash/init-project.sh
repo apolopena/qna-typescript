@@ -14,6 +14,9 @@ all_zeros='^0$|^0*0$'
 # Load spinner
 . .gp/bash/spinner.sh
 
+# We use resources/js/app.tsx not resources/js/app.js so remove it
+[[ -f resources/js/app.js ]] && rm resources/js/app.js
+
 # Migrate and Seed
 declare -a exit_codes=()
 msg="Migrating and seeding project database"
