@@ -42,6 +42,17 @@ yarn add @types/react @types/react-dom @types/node --dev --silent 2> >(grep -v w
 exit_code=$?
 if [[ $exit_code == 0 ]]; then stop_spinner 0 && log_silent "SUCCESS: $msg"; else stop_spinner 1 && log_silent -e "ERROR: $msg"; fi
 
+# Generate tsconfig.json 
+if [[ ! -f tsconfig.json ]]; then
+  msg="Generating tsconfig.json"
+  log_silent "$msg" && start_spinner "$msg"
+  if tsc --init --jsx react; then
+    stop_spinner 0 && log_silent "SUCCESS: $msg"
+  else
+    stop_spinner 1 && log_silent -e "ERROR: $msg"
+  fi
+fi
+
 # Hot reload
 msg="Setting up hot reload system"
 log_silent "$msg"
