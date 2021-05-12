@@ -5,6 +5,7 @@
   ],
   "editor.insertSpaces": true,
   "editor.tabSize": 2,
-  "editor.detectIndentation": false,
-  "workbench.colorTheme": "Default Dark+"
+  "editor.detectIndentation": true,
+  "workbench.colorTheme": "Default Dark+",
+  "files.autoSave": "off"
 }
