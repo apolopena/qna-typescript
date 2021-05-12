@@ -41,7 +41,7 @@ if [[ $exit_code == 0 ]]; then stop_spinner 0 && log_silent "SUCCESS: $msg"; els
 # Typescript types
 msg="Installing Typescript types"
 log_silent "$msg" && start_spinner "$msg"
-yarn add @types/react @types/react-dom @types/node --dev --silent 2> >(grep -v warning 1>&2) > /dev/null 2>&1
+yarn add @types/node @types/react @types/react-dom @types/react-router-dom --dev --silent 2> >(grep -v warning 1>&2) > /dev/null 2>&1
 exit_code=$?
 if [[ $exit_code == 0 ]]; then stop_spinner 0 && log_silent "SUCCESS: $msg"; else stop_spinner 1 && log_silent -e "ERROR: $msg"; fi
 
