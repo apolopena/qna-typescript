@@ -1,11 +1,16 @@
-import React from 'react'
-import { Header, QuestionForm, QuestionList } from '../components'
+import React, { useEffect } from 'react'
+//import { Header, QuestionForm, QuestionList } from '../components'
 import { useDataApi } from '../hooks'
 
-export function QuestionsContainer({ questions }) {
+export function QuestionsContainer() {
   const [payload] = useDataApi('/api/questions')
-
+  useEffect( () => {
+    console.log(`payload=${JSON.stringify(payload, null, 2)}`)
+  })
   return (
+    <>
+    </>
+/*
     <>
       <Header />
       <div className='container py-4'>
@@ -21,5 +26,6 @@ export function QuestionsContainer({ questions }) {
         </div>
       </div>
     </>
+*/
   )
 }

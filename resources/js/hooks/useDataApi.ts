@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const useDataApi = url => {
+const useDataApi = (url: string) => {
   const [dataState, setDataState] = useState({ data: [], isLoading: true });
   const [endpointUrl] = useState(url);
 
