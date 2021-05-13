@@ -1,7 +1,12 @@
 import React from 'react'
 import './styles.css'
+import { QuestionData } from 'qna-types'
 
-const QuestionListItem = ({ item }) => (
+interface Props {
+  item: QuestionData
+}
+
+const QuestionListItem = ({ item }: Props) => (
   <div className='row'>
     <div className='col-sm-10'>
       <h5>{item.description}</h5>
