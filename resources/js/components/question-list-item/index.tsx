@@ -2,7 +2,7 @@ import React from 'react'
 import './styles.css'
 import { QuestionData } from 'qna-types'
 
-interface Props {
+type Props = {
   item: QuestionData
 }
 
