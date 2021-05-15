@@ -1,25 +1,21 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-import { QuestionData } from 'qna-types'
+import { Payload } from 'qna-types'
 
-type Payload = {
-  data: any
-  isLoading: boolean
-}
-
-const useDataApi = (url: string) => {
-  const [dataState, setDataState] = useState<Payload>({ data: [], isLoading: true });
+const useDataApi = <FetchedData>(url: string): Payload<FetchedData> => {
+  
+  const [dataState, setDataState] = useState<Payload<FetchedData>>({ isLoading: true });
   const [endpointUrl] = useState(url);
 
   useEffect(() => {
     const fetchDataFromApi = async () => {
       try {
         //setDataState({ ...dataState, isLoading: true });
-        const response = await axios.get(endpointUrl);
+        const { data } = await axios.get(endpointUrl);
         setDataState({
-          ...dataState,
-          data: response.data,
+          /*...dataState,*/
+          data,
           isLoading: false
         });
       } catch (e) {
@@ -30,7 +26,7 @@ const useDataApi = (url: string) => {
     fetchDataFromApi();
   }, []);
 
-  return [dataState];
+  return dataState;
 };
 
 export default useDataApi;

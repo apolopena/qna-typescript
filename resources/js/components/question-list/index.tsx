@@ -11,7 +11,7 @@ const QuestionList = ({ payload, isLoading }: QuestionListProps) => (
     <div className='card-header'>Questions</div>
     <div className='card-body'>
       {
-        payload.data.map(( item: QuestionData ) => (
+        payload.data?.map(( item: QuestionData ) => (
           <React.Fragment key={item.id}>
             <Link to={`/answers/${item.id}`}>
               <QuestionListItem item={item} />

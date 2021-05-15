@@ -1,16 +1,16 @@
 import React, { memo, useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 
-import { AnswerData } from 'qna-types'
+import { Payload, AnswersPayload, AnswerData } from 'qna-types'
+
 import AnswerContext from '../context/AnswerContext'
 import { Header, AnswerForm, AnswerList } from '../components'
 import { useDataApi } from '../hooks'
-import { AnyAaaaRecord } from 'dns'
 
 export function AnswersContainer() {
   const { questionId } = useParams<{ questionId: string }>()
-  const [payload] = useDataApi(`/api/questions/${questionId}`)
-  const [answers, setAnswers] = useState< Array<AnswerData> >()
+  const payload = useDataApi<AnswersPayload>(`/api/questions/${questionId}`)
+  const [answers, setAnswers] = useState<AnswerData[]>()
 
   
   // for debugging
@@ -21,8 +21,8 @@ export function AnswersContainer() {
   }, [payload, answers])
  
 
-  const displayAnswers = (data: AnswerData) => {
-    if (!data) return
+  const displayAnswers = (payload: Payload<AnswersPayload>) => {
+    if (!payload.data) return
 
     const NoAnswers = () => (
       <div className='cardBody py-4'>
@@ -49,9 +49,9 @@ export function AnswersContainer() {
           <div className='col-md-6'>
             <div className='card' style={{ border: 'none' }}>
               <div className='card-header'>
-                {payload.isLoading ? '' : payload.data.description}
+                {payload.isLoading ? '' : payload.data?.description}
               </div>
-              {displayAnswers(payload.data.answers)}
+              {displayAnswers(payload)}
             </div>
             <AnswerContext.Provider value={{ answers, setAnswers }}>
               <AnswerForm questionId={Number(questionId)} />

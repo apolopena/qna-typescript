@@ -1,5 +1,17 @@
 declare module 'qna-types' {
 
+  interface Payload<T> {
+    data?: T
+    isLoading: boolean
+  }
+
+  type AnswersPayload = AnswersData & { answers: AnswerData[] }
+
+  interface AnswersData extends Item {
+    data: { answers: AnswerData[] }
+    isLoading?: boolean
+  }
+
   interface Item {
     id: number
     description: string
@@ -16,7 +28,7 @@ declare module 'qna-types' {
   }
 
   type QuestionListProps = {
-    payload: { data: Array<QuestionData> }
+    payload: Payload<QuesionData[]>
     isLoading?: boolean
   }
 
