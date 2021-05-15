@@ -6,13 +6,17 @@ import './styles.css'
 import AnswerContext from '../../context/AnswerContext'
 import { Form } from '../index'
 
-export default function AnswersForm({ questionId }) {
+type Props = {
+  questionId: number
+}
+
+export default function AnswersForm({ questionId }: Props) {
   const MIN = 5
   const [answer, setAnswer] = useState('')
   const [error, setError] = useState('')
   const { setAnswers } = useContext(AnswerContext)
 
-  const handleSubmit = e => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (answer == null || answer.trim() === '') {
       setError('The answer field is required.')
@@ -26,11 +30,11 @@ export default function AnswersForm({ questionId }) {
   }
 
   // it works.
-  const post = (data) => {
+  const post = (data: object) => {
     axios.post('/api/answers', data)
       .then(res => {
         setAnswer('')
-        setAnswers(res.data)
+        setAnswers && setAnswers(res.data)
       })
       .catch(err => setError(err))
   }
@@ -42,14 +46,14 @@ export default function AnswersForm({ questionId }) {
           Answer the question.
         </Form.Title>
         <Form.TextArea
-          rows='2'
+          rows={2}
           className={
             error ? 'form-control form-control-lg mt-3 is-invalid' : 'form-control form-control-lg mt-3'
           }
           value={answer}
           onChange={
-            ({ target }) => {
-              setAnswer(target.value)
+            (e: React.ChangeEvent<HTMLTextAreaElement> ) => {
+              setAnswer(e.target.value)
               setError('')
             }
           }

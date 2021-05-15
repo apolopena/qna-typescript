@@ -1,13 +1,14 @@
 import React from 'react'
 
 import './styles.css'
-import { AnswerListItem } from '../index'
+import { AnswerData, AnswerListProps } from 'qna-types'
+import { AnswerListItem } from '../../components'
 
-const AnswerList = ({ answers, isLoading }) => (
+const AnswerList = ({ answers, isLoading }: AnswerListProps) => (
   <div className='card'>
     <div className='card-body'>
       {
-        answers.map(item => (
+        answers.map( (item: AnswerData) => (
           <React.Fragment key={item.id}>
             <AnswerListItem item={item} />
             <hr />
