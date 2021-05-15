@@ -1,31 +1,19 @@
 declare module 'qna-types' {
-  
-  interface GenericItem {
+
+  interface Item {
     id: number
     description: string
     created_at: string
     updated_at: string
   }
 
-  interface QuestionData extends GenericItem {
+  interface QuestionData extends Item {
     answers_count: number
   }
 
-  interface AnswerData extends GenericItem {
+  interface AnswerData extends Item {
     question_id: number 
   }
-
-  /*
-  interface QuestionPayload extends GenericItem {
-    answers: Array<AnswerData>
-    isLoading?: boolean
-  }
-
-  type Payload = {
-    data: null & [] & QuestionPayload
-    isLoading?: boolean
-  }
-  */
 
   type QuestionListProps = {
     payload: { data: Array<QuestionData> }
@@ -38,11 +26,7 @@ declare module 'qna-types' {
   }
 
   type AnswerContextT = {
-    //value: Array<AnswerData> | null
-
     answers: Array<AnswerData>
     setAnswers: ( a: Array<AnswerData> ) => void
   }
-
-
 }
