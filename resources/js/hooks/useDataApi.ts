@@ -1,22 +1,15 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-//import { Payload } from 'qna-types'
+import { QuestionData } from 'qna-types'
 
-/*
-interface Loadable { 
-  isLoading: boolean 
+type Payload = {
+  data: any
+  isLoading: boolean
 }
-interface Question extends Loadable, QuestionData { 
-  data: [] | null 
-}
-interface Answer extends Loadable, AnswerData { 
-  data: object | null
-} */
-
 
 const useDataApi = (url: string) => {
-  const [dataState, setDataState] = useState({ data: [], isLoading: true });
+  const [dataState, setDataState] = useState<Payload>({ data: [], isLoading: true });
   const [endpointUrl] = useState(url);
 
   useEffect(() => {
