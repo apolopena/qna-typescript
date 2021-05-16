@@ -1,7 +1,7 @@
 declare module 'qna-types' {
 
   interface Payload<T> {
-    data?: T
+    data: T | null
     isLoading: boolean
   }
 
