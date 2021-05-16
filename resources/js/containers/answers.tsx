@@ -11,36 +11,33 @@ export function AnswersContainer() {
   const { questionId } = useParams<{ questionId: string }>()
   const payload = useDataApi<AnswersPayload>(`/api/questions/${questionId}`)
   const [answers, setAnswers] = useState<AnswerData[]>()
-
-  
-  // for debugging
+  /*
+  // uncomment for debugging
   console.count('render count')
   useEffect(() => {
     console.log(`the value of answers is ${JSON.stringify(answers, null, 2)}`)
     console.log(`the value of payload is ${JSON.stringify(payload, null, 2)}`)
   }, [payload, answers])
- 
-
+  */
   const displayAnswers = (payload: Payload<AnswersPayload>) => {
-    if (!payload.data) return
-
+    if (!payload.data) return (
+      <div className='cardBody py-4 error mt-1'>Server Error: No Data</div>
+    )
     const NoAnswers = () => (
       <div className='cardBody py-4'>
         No answers yet! Be the first to answer by using the form below.
       </div>
     )
-
     if (answers) {
       return (answers.length > 0)
         ? <AnswerList answers={answers} />
         : NoAnswers()
     }
-    
     return (payload.data.answers.length > 0)
       ? <AnswerList answers={payload.data.answers} />
       : NoAnswers()
   }
-
+  
   return (
     <>
       <Header />
