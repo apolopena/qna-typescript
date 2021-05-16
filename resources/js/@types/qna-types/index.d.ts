@@ -1,7 +1,8 @@
 declare module 'qna-types' {
 
-  interface Payload<T> {
-    data: T | null
+  interface Payload<R> {
+    data: R | null
+    error?: string
     isLoading: boolean
   }
 
@@ -10,7 +11,7 @@ declare module 'qna-types' {
   interface AnswersData extends Item {
     data: { answers: AnswerData[] }
     isLoading?: boolean
-  }
+  } 
 
   interface Item {
     id: number
@@ -33,12 +34,12 @@ declare module 'qna-types' {
   }
 
   type AnswerListProps = {
-    answers: Array<AnswerData>
+    answers: AnswerData[]
     isLoading?: boolean
   }
 
   type AnswerContextT = {
-    answers: Array<AnswerData>
-    setAnswers: ( a: Array<AnswerData> ) => void
+    answers: AnswerData[]
+    setAnswers: ( a: AnswerData[] ) => void
   }
 }

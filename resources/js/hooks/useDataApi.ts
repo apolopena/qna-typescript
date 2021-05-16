@@ -14,7 +14,7 @@ const useDataApi = <Response>(url: string): Payload<Response> => {
         setDataState({ data, isLoading: false });
       } catch (e) {
         console.log(e);
-        setDataState({ data: null, isLoading: false });
+        setDataState({ data: null, error: e.message, isLoading: false });
       }
     };
     fetchDataFromApi();

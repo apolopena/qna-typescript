@@ -20,9 +20,10 @@ export function AnswersContainer() {
   }, [payload, answers])
   */
   const displayAnswers = (payload: Payload<AnswersPayload>) => {
-    if (!payload.data) return (
-      <div className='cardBody py-4 error mt-1'>Server Error: No Data</div>
-    )
+    if (payload.error) return <div className='cardBody py-4 error mt-1'>{payload.error}</div>
+    if (!payload.data) return <></>
+    console.log(`the value of answers is ${JSON.stringify(answers, null, 2)}`)
+    console.log(`the value of payload is ${JSON.stringify(payload, null, 2)}`)
     const NoAnswers = () => (
       <div className='cardBody py-4'>
         No answers yet! Be the first to answer by using the form below.
@@ -33,11 +34,11 @@ export function AnswersContainer() {
         ? <AnswerList answers={answers} />
         : NoAnswers()
     }
-    return (payload.data.answers.length > 0)
-      ? <AnswerList answers={payload.data.answers} />
+    return (payload.data.answers?.length > 0)
+      ? <AnswerList answers={payload.data?.answers} />
       : NoAnswers()
   }
-  
+
   return (
     <>
       <Header />
