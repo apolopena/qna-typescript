@@ -1,27 +1,26 @@
-import React, { Component } from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 import './App.css'
-import { Questions, Answers } from '../pages'
+import { Questions, Answers, NotFound } from '../pages'
 
-class App extends Component {
-  render() {
-    return (
-      <BrowserRouter>
-        <div>
-          <Switch>
-            <Route exact path='/'>
-              <Questions />
-            </Route>
-            <Route path='/answers'>
-              <Answers />
-            </Route>
-          </Switch>
-        </div>
-      </BrowserRouter>
-    )
-  }
+function App() {
+  return (
+    <BrowserRouter>
+      <Switch>
+        <Route exact path='/'>
+          <Questions />
+        </Route>
+        <Route path='/answers'>
+          <Answers />
+        </Route>
+        <Route path='*'>
+          <NotFound />
+        </Route>
+      </Switch>
+    </BrowserRouter>
+  )
 }
 
 ReactDOM.render(<App />, document.getElementById('app'))
