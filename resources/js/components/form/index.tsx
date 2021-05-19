@@ -1,42 +1,43 @@
-import React from 'react'
+import React, {
+  HTMLAttributes,
+  FormHTMLAttributes,
+  InputHTMLAttributes,
+  TextareaHTMLAttributes,
+  ButtonHTMLAttributes
+} from 'react'
 
-interface TextAreaProps extends React.HTMLAttributes<HTMLTextAreaElement> {
-  children?: React.ReactNode
-  rows?: number
-  value?: string
-}
+type FormWrapper = React.HTMLAttributes<HTMLDivElement>
+type FormBase = React.FormHTMLAttributes<HTMLFormElement>
+type FormError = React.HTMLAttributes<HTMLDivElement>
+type FormTitle = React.HTMLAttributes<HTMLDivElement>
+type FormInput = React.InputHTMLAttributes<HTMLInputElement>
+type FormTextArea = React.TextareaHTMLAttributes<HTMLTextAreaElement>
+type FormSubmit = React.ButtonHTMLAttributes<HTMLButtonElement>
 
-interface FormProps extends React.HTMLAttributes<HTMLFormElement> {
-  children?: React.ReactNode
-  method?: string
-}
-
-export default function Form ({ children, ...restProps }: React.HTMLAttributes<HTMLDivElement>) {
+export default function Form ({ children, ...restProps }: FormWrapper) {
   return <div {...restProps} >{children}</div>
 }
 
-Form.Base = function FormBase({ children, ...restProps }: FormProps) {
+Form.Base = function FormBase({ children, ...restProps }: FormBase) {
   return <form {...restProps}>{children}</form>
 }
 
-Form.Error = function FormError({ children, ...restProps }: React.HTMLAttributes<HTMLDivElement>) {
+Form.Error = function FormError({ children, ...restProps }: FormError) {
   return <div {...restProps}>{children}</div>
 }
 
-Form.Title = function FormTitle({ children, ...restProps }: React.HTMLAttributes<HTMLDivElement>) {
+Form.Title = function FormTitle({ children, ...restProps }: FormTitle) {
   return <div {...restProps}>{children}</div>
 }
 
-/*
-Form.Input = function FormInput({ children, ...restProps }: React.HTMLAttributes<HTMLDivElement>) {
+Form.Input = function FormInput({ children, ...restProps }: FormInput) {
   return <input {...restProps}>{children}</input>
 }
-*/
 
-Form.TextArea = function FormTextArea({ children, ...restProps }: TextAreaProps) {
+Form.TextArea = function FormTextArea({ children, ...restProps }: FormTextArea) {
   return <textarea {...restProps}>{children}</textarea>
 }
 
-Form.Submit = function FormSubmit({ children, ...restProps }: React.HTMLAttributes<HTMLButtonElement>) {
+Form.Submit = function FormSubmit({ children, ...restProps }: FormSubmit) {
   return <button {...restProps}>{children}</button>
 }
