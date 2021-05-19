@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import { QuestionData } from 'qna-types'
 
@@ -6,10 +6,16 @@ import { Header, QuestionForm, QuestionList } from '../components'
 import { useDataApi } from '../hooks'
 
 export function QuestionsContainer() {
+  const [waiting, setWaiting] = useState(true);
   const payload = useDataApi<QuestionData[]>('/api/questions')
+
   useEffect( () => {
-    console.log(`payload=${JSON.stringify(payload, null, 2)}`)
-  })
+    let loadTimer = setTimeout(() => setWaiting(false), 250);
+    return () => {
+      clearTimeout(loadTimer);
+    };
+  }, [payload])
+  
   return (
     <>
       <Header />
@@ -18,7 +24,14 @@ export function QuestionsContainer() {
           <div className='col-xs-12 col-md-8 col-xl-6'>
             { <QuestionForm /> }
             <p />
-            { <QuestionList payload={payload} isLoading={payload.isLoading} /> }
+            {
+              (payload.isLoading && !waiting) && <p className='text-center'>Loading data...</p> || 
+              payload.error && (
+                <div className='text-center error'>
+                    {`Internal Error ${payload.error}`}
+                </div> ) || 
+              <QuestionList payload={payload} /> 
+            }
           </div>
         </div>
       </div>
