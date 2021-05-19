@@ -11,7 +11,7 @@ const validEndpoint = (path: string): boolean => {
 }
 
 const useDataApi = <Response>(url: string): Payload<Response> => {
-  const [dataState, setDataState] = useState<Payload<Response>>({ data: null, isLoading: true });
+  const [dataState, setDataState] = useState<Payload<Response>>({ data: null, isLoading: true })
   const [endpointUrl] = useState(url);
 
 useEffect(() => {
@@ -38,7 +38,7 @@ useEffect(() => {
   }
 }, [url]);
 
-  return dataState;
+  return dataState
 };
 
-export default useDataApi;
+export default useDataApi
