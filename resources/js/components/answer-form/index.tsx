@@ -4,10 +4,15 @@ import axios from 'axios'
 import './styles.css'
 
 import AnswerContext from '../../context/AnswerContext'
-import { Form } from '../index'
+import { Form } from '../../components'
 
 type Props = {
   questionId: number
+}
+
+type Answer = { 
+  description: string
+  question_id: number
 }
 
 export default function AnswersForm({ questionId }: Props) {
@@ -29,14 +34,25 @@ export default function AnswersForm({ questionId }: Props) {
     post({ description: answer, question_id: questionId })
   }
 
-  // it works.
-  const post = (data: object) => {
+  const post = (data: Answer) => {
     axios.post('/api/answers', data)
       .then(res => {
         setAnswer('')
         setAnswers && setAnswers(res.data)
       })
-      .catch(err => setError(err))
+      .catch(err => {
+        const status = Number(err.message.match(/\b\d+/))
+        let culprit;
+        switch (status) {
+          case 405:
+            culprit = `: Bad Endpoint: ${err.config.url}`
+            break;
+          case 422:
+            culprit = `: Could Not Process Data: ${JSON.stringify(data)}`
+            break;
+        }
+        setError(`Internal Error: ${err.message} ${culprit}`)
+      })
   }
 
   return (
