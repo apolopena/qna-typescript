@@ -11,6 +11,8 @@ export default function QuestionForm() {
   const [question, setQuestion] = useState('')
   const [error, setError] = useState('')
 
+  type Question = { description: string }
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (question == null || question.trim() === '') {
@@ -28,13 +30,10 @@ export default function QuestionForm() {
     post({ description: question })
   }
 
-  // it works.
-  const post = (data: Object) => {
+  const post = (data: Question) => {
     axios.post('/api/questions', data)
       .then(res => {
-        console.log(`response: ${JSON.stringify(res, null, 2)}`)
-        console.log(`STATUS: ${res.status}`)
-        console.log(`question_id: ${res.data.id}`)
+        // console.log(`response: ${JSON.stringify(res, null, 2)}`)
         history.push(`/answers/${res.data.id}`)
       })
       .catch(err => setError(err))
