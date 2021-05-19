@@ -14,8 +14,9 @@ all_zeros='^0$|^0*0$'
 # Load spinner
 . .gp/bash/spinner.sh
 
-# We use resources/js/app.tsx not resources/js/app.js so remove it
+# remove unused scaffolding
 [[ -f resources/js/app.js ]] && rm resources/js/app.js
+[[ -f resources/js/components/Example.js ]] && rm resources/js/components/Example.js
 
 # Migrate and Seed
 declare -a exit_codes=()
