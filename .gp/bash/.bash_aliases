@@ -12,4 +12,4 @@ alias update-pma-pws='bash $GITPOD_REPO_ROOT/.gp/bash/change-passwords.sh phpmya
 # Shows help for update_pma_pws
 alias update-pma-pws-help='echo -e "$(cat "$GITPOD_REPO_ROOT/.gp/snippets/messages/update-pma-pws-help.txt")"'
 # opens or refreshes the preview browser to the web root
-alias op='f(){ bash "$GITPOD_REPO_ROOT"/.gp/bash/open-preview.sh "$1";  unset -f f; }; f'
+alias op='f(){ bash "$GITPOD_REPO_ROOT"/.gp/bash/open-preview.sh "$@";  unset -f f; }; f'
