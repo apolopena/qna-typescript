@@ -25,7 +25,7 @@ phpmyadmin() {
   local name="change-passwords.sh phpmyadmin"
   local err="$name ERROR:"
   local config_file="public/phpmyadmin/config.inc.php"
-  local all_zeros='^0$|^0*0$'
+  local all_zeros='^[0]+$'
   local exit_codes
   local values
 
